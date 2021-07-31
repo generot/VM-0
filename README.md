@@ -29,7 +29,6 @@ proc main {
 	!a;
 }
 ```
-<br>
 CMD: `./vc input.vz && ./dasm input.bc`<br>
 Output:<br>
 ```
