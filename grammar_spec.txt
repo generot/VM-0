@@ -5,7 +5,7 @@ proc fib {
 		res := a + b;
 		a := b;
 		b := res;
-	}
+	};
 }
 
 proc main {
@@ -13,11 +13,33 @@ proc main {
 	b := 1;
 
 	i := 0;
-	cnt := 10.35423;
+	cnt := 10;
 
 	if cnt == 10 {
 		!cnt;
-	}
+	};
 
 	call fib;
 }
+
+--------------------------------------------------------------------------------
+
+<program> ::= { <decl> | <procedure> }
+<procedure> ::= "proc" <ident> <block>
+<decl> ::= "var" <ident> {"," <ident> }
+<block> ::= "{" { <statement> } "}"
+<statement> ::= <assign> | <cond> | <call> | <write> | <read>
+<cond> ::= <loop> | <if>
+<assign> ::= <ident> ":=" <expr>
+<loop> ::= "while" <expr> <block>
+<if> ::= "if" <expr> <block>
+<write> ::= "!" <expr>
+<read> ::= "?" <ident>
+<call> ::= "call" <ident>
+<expr> ::= <comp> ("&&" | "||") <comp>
+<comp> ::= <term> ("<=" | ">=" | "<" | ">" | "==" | "!=" ) <term>
+<term> ::= <factor> ("+" | "-" ) <factor>
+<factor> ::= <value> ("*" | "/") > <value>
+<value> ::= <number> | <ident>
+<ident> ::= [a-zA-Z0-9]+
+<number> ::= [0-9]+
