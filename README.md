@@ -21,18 +21,18 @@ The `VAL_OR_ADDR` enum basically tells the virtual machine, when executing the p
 
 ### Example
 `input.vz` - basically a program that prints 15(stored in 'a':
-```
+``
 var a;
 
 proc main {
 	a := 10 + 5;
 	!a;
 }
-```
+``
 <br>
 CMD: `./vc input.vz && ./dasm input.bc`<br>
 Output:
-```
+``
 Program size: 7 instructions
 Stack size: [Code segment: 0, Data segment: 0]
 Entry point address: 0
@@ -44,7 +44,7 @@ Entry point address: 0
 [PUSH - INST_ADDR - SC_INVALID - (0.000000 1)]
 [DEREF - INST_VAL - SC_INVALID - (0.000000 0)]
 [SYSCALL - INST_VAL - SC_WRITELN - (0.000000 0)]
-```
+``
 
 ## Additional info
 The compiler itself is written in C++(to save time), the virtual machine and the disassembler are written in C. No external libs were used here. The VM/0 grammar specification is represented(in BNF) in `grammar_spec.txt`. There are some more example VM/0 programs in `bin/misc`. 
