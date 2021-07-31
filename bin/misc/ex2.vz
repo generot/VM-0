@@ -1,0 +1,31 @@
+var a, b;
+
+proc somefunc {
+    if a < 30 {
+        b := b + 2;
+        a := a + 1;
+
+        call somefunc;
+    };
+}
+
+proc func2 {
+    while a <= 20 {
+        if a == 10 {
+            a := 15;
+        };
+
+        !a;
+        a := a + 1;
+    };
+}
+
+proc main {
+    a := 0;
+    b := 24 > 10 && 5 == 5;
+
+    call func2;
+    call somefunc;
+
+    !b;
+}

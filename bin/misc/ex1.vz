@@ -1,0 +1,17 @@
+var smth1, a4;
+var alpha, b5, reii3;
+
+proc pr {
+    !alpha;
+}
+
+proc main {
+    a4 := 4 * 3 + 2;
+    alpha := 3;
+
+    if alpha == 10 && a4 < 2 {
+        call pr;
+    };
+
+    !reii3;
+}
