@@ -8,7 +8,7 @@ Running a VM/0 program is a simple task. A few steps should be taken in the foll
 - Pass the path to the resulting `.bc` file to the VM/0 Virtual Machine(VM), which, similar to the compiler, will be `vm.exe`.
 - Profit!
 
-## Disassemblimg VM/0 bytecode
+## Disassembling VM/0 bytecode
 For the sole purpose of debugging and readability, the VM/0 Disassembler(DASM) is provided(`dasm.exe`). If, for example, you have the bytecode file `exm.bc`, you can simply pass it as a command line argument to DASM and you will be given not only the disassembly of the bytecode, but also metadata about the program you've disassembled. In the context of a VM/0 program, the metadata is:
 - The entry point's address
 - The program's size(in instructions)
