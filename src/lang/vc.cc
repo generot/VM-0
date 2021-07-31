@@ -9,9 +9,6 @@ bcode_vector bytecode;
 
 size_s var_num = 1;
 
-stack<size_s> if_stack;
-stack<size_s> while_stack;
-
 //----------------------------------//
 ////////////////PARSER////////////////
 //----------------------------------//

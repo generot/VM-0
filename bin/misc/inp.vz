@@ -1,0 +1,6 @@
+var a;
+
+proc main {
+	a := 10 + 5;
+	!a;
+}
