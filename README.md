@@ -20,7 +20,7 @@ The a single instruction in the disassembly is in the following form: `[<INSTR> 
 The `VAL_OR_ADDR` enum basically tells the virtual machine, when executing the program, whether it should use the `VALUE` or `ADDR` member of the instruction that is currently being performed. Since they both lie in a union(and 'cause I'm too lazy to check for that in DASM), the unused member is going to have some garbage value(obviously, since they share memory).
 
 ### Example
-`input.vz` - basically a program that prints 15(stored in 'a':
+`input.vz` - basically a program that prints 15(stored in 'a'):
 ```
 var a;
 
