@@ -1,0 +1,36 @@
+var a, b, res;
+
+var i, cnt;
+proc fib {
+    a := 0;
+    b := 1;
+
+    res := 0;
+    i := 0;
+
+    while i < cnt {
+        res := a + b;
+        a := b;
+        b := res;
+
+        !res;
+        i := i + 1;
+    };
+}
+
+var factres;
+proc factorial {
+    factres := 1;
+
+    while cnt > 1 {
+        factres := factres * cnt;
+        cnt := cnt - 1;
+    };
+}
+
+proc main {
+    ?cnt;
+    
+    call factorial;
+    !factres;
+}
