@@ -57,7 +57,8 @@ enum _Syscall {
 
 enum _Ctype {
     INST_VAL, 
-    INST_ADDR
+    INST_ADDR,
+    INST_NOARGS
 };
 
 #ifdef __cplusplus

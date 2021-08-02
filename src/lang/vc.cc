@@ -63,7 +63,7 @@ void procedure(lexer& lx) {
     block(lx);
 
     if(ident != ENTRY_POINT) 
-        bytecode.push_back({ INST_VAL, OPC_RET });
+        bytecode.push_back({ INST_NOARGS, OPC_RET });
 }
 
 void block(lexer& lx) {
@@ -175,8 +175,8 @@ void inpout(lexer& lx) {
         in.addr = sym.addr;
 
         bytecode.push_back(in);
-        bytecode.push_back({ INST_VAL, OPC_DEREF, SC_INVALID });
-        bytecode.push_back({ INST_VAL, OPC_SYSCALL, SC_WRITELN });
+        bytecode.push_back({ INST_NOARGS, OPC_DEREF, SC_INVALID });
+        bytecode.push_back({ INST_NOARGS, OPC_SYSCALL, SC_WRITELN });
     }
 }
 
@@ -186,7 +186,7 @@ void expr(lexer& lx) {
         opcode opc = lx.accept() == "&&" ? OPC_AND : OPC_OR;
         comp(lx);
 
-        bytecode.push_back({ INST_VAL, opc });
+        bytecode.push_back({ INST_NOARGS, opc });
     }
 }
 
@@ -199,7 +199,7 @@ void comp(lexer& lx) {
         opcode opc = match_comp(lx.accept());
         term(lx);
 
-        bytecode.push_back({ INST_VAL, opc });
+        bytecode.push_back({ INST_NOARGS, opc });
     }
 }
 void term(lexer& lx) {
@@ -208,7 +208,7 @@ void term(lexer& lx) {
         opcode opc = lx.accept() == "+" ? OPC_ADDF : OPC_SUBF;
         factor(lx);
 
-        bytecode.push_back({ INST_VAL, opc });
+        bytecode.push_back({ INST_NOARGS, opc });
     }
 }
 
@@ -218,7 +218,7 @@ void factor(lexer& lx) {
         opcode opc = lx.accept() == "*" ? OPC_MULTF : OPC_DIVF;
         value(lx);
 
-        bytecode.push_back({ INST_VAL, opc });
+        bytecode.push_back({ INST_NOARGS, opc });
     }
 }
 
@@ -244,7 +244,7 @@ void value(lexer& lx) {
     } else {
         symbol var = symbol_table[val];
         bytecode.push_back({ INST_ADDR, OPC_PUSH, SC_INVALID, (size_s)var.addr });
-        bytecode.push_back({ INST_VAL, OPC_DEREF, SC_INVALID });
+        bytecode.push_back({ INST_NOARGS, OPC_DEREF, SC_INVALID });
     }
 }
 

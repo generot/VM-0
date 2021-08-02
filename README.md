@@ -16,33 +16,45 @@ For the sole purpose of debugging and readability, the VM/0 Disassembler(DASM) i
 - Data segment size(if the stack size is predetermined)
 - Code segment size(if the stack size is predetermined)
 
-The a single instruction in the disassembly is in the following form: `[<INSTR> - <VAL_OR_ADDR_ENUM> - <SYSCALL> - (<VALUE> <ADDR>)]`.<br>
-The `VAL_OR_ADDR` enum basically tells the virtual machine, when executing the program, whether it should use the `VALUE` or `ADDR` member of the instruction that is currently being performed. Since they both lie in a union(and 'cause I'm too lazy to check for that in DASM), the unused member is going to have some garbage value(obviously, since they share memory).
+The a single instruction in the disassembly is in the following form: `<INSTR_POINTER>: [ <INSTR> <VALUE?> | <ADDRESS?> ]`.<br>
+The entry point of the program is marked by the line: `----ENTRY POINT----`.<br>
 
 ### Example
 `input.vz` - basically a program that prints 15(stored in 'a'):
 ```
-var a;
+var op1, op2;
+proc add {
+	op1 := op1 + op2;
+}
 
 proc main {
-	a := 10 + 5;
-	!a;
+	?op1; ?op2;
+	call add;
+
+	!op1;
 }
 ```
 CMD: `./vc input.vz && ./dasm input.bc`<br>
 Output:<br>
 ```
-Program size: 7 instructions
-Stack size: [Code segment: 0, Data segment: 0]
-Entry point address: 0
+Program size: 13 instructions
+Stack size(default): [Code segment: 512, Data segment: 1536]
+Entry point address: 0x07
 
-[PUSH - INST_VAL - SC_INVALID - (10.000000 4621819117588971520)]
-[PUSH - INST_VAL - SC_INVALID - (5.000000 4617315517961601024)]
-[ADDF - INST_VAL - SC_WRITE - (0.000000 0)]
-[STORE - INST_ADDR - SC_INVALID - (0.000000 1)]
-[PUSH - INST_ADDR - SC_INVALID - (0.000000 1)]
-[DEREF - INST_VAL - SC_INVALID - (0.000000 0)]
-[SYSCALL - INST_VAL - SC_WRITELN - (0.000000 0)]
+0x00: [ PUSH <0x01> ]   
+0x01: [ DEREF ]
+0x02: [ PUSH <0x02> ]   
+0x03: [ DEREF ]
+0x04: [ ADDF ]
+0x05: [ STORE <0x01> ]  
+0x06: [ RET ]
+----ENTRY POINT----     
+0x07: [ SC_READ <0x01> ]
+0x08: [ SC_READ <0x02> ]
+0x09: [ CALL <0x00> ]   
+0x0A: [ PUSH <0x01> ]   
+0x0B: [ DEREF ]
+0x0C: [ SC_WRITELN ]
 ```
 
 ## Additional info

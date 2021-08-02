@@ -1,6 +1,11 @@
-var a;
+var op1, op2;
+proc add {
+	op1 := op1 + op2;
+}
 
 proc main {
-	a := 10 + 5;
-	!a;
+	?op1; ?op2;
+	call add;
+
+	!op1;
 }

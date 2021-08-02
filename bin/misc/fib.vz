@@ -31,6 +31,5 @@ proc factorial {
 proc main {
     ?cnt;
     
-    call factorial;
-    !factres;
+    call fib;
 }
