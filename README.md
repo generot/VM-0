@@ -16,7 +16,7 @@ For the sole purpose of debugging and readability, the VM/0 Disassembler(DASM) i
 - Data segment size(if the stack size is predetermined)
 - Code segment size(if the stack size is predetermined)
 
-The a single instruction in the disassembly is in the following form: `<INSTR_POINTER>: [ <INSTR> <VALUE?> | <ADDRESS?> ]`.<br>
+A single instruction in the disassembly is in the following form: `<INSTR_POINTER>: [ <INSTR> <VALUE?> | <ADDRESS?> ]`.<br>
 The entry point of the program is marked by the line: `----ENTRY POINT----`.<br>
 
 ### Example
