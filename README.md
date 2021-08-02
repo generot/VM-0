@@ -20,7 +20,7 @@ The a single instruction in the disassembly is in the following form: `<INSTR_PO
 The entry point of the program is marked by the line: `----ENTRY POINT----`.<br>
 
 ### Example
-`input.vz` - basically a program that prints 15(stored in 'a'):
+`input.vz` - Read two numbers from STDIN, store their sum in `op1` and print `op1`:
 ```
 var op1, op2;
 proc add {
