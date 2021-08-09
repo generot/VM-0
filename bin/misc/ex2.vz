@@ -20,12 +20,6 @@ proc func2 {
     };
 }
 
-proc main {
-    a := 0;
-    b := 24 > 10 && 5 == 5;
-
-    call func2;
-    call somefunc;
-
-    !b;
+proc printA {
+    !a;
 }

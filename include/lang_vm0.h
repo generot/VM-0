@@ -13,7 +13,7 @@
 #include <map>
 
 constexpr const char* 
-    LEX_REG = "[a-zA-Z0-9]+(?:\\.\\d+)?|[,;{}?+\\-*\\/\\(\\)]|[:=<>!&|]{1,2}";
+    LEX_REG = "[a-zA-Z0-9]+(?:\\.\\d+)?|[,;{}?+\\-*\\/\\(\\)]|[:=<>!&|]{1,2}|\".*\"";
 
 constexpr const char* 
     ENTRY_POINT = "main";
@@ -25,12 +25,14 @@ enum symbol_type { SYM_VARIABLE, SYM_FUNCTION };
 
 class lexer {
 private:
+    std::string filepath;
+
     token_vector tokens;
     token_iter curr;
     size_t ix;
 
 public:
-    lexer(token_vector t_vec);
+    lexer(token_vector t_vec, std::string filedir);
 
     bool expect(std::string tok, bool kill_prog = true);
     bool eof(void);
@@ -38,6 +40,7 @@ public:
     void unaccept(void);
     std::string accept(void);
     std::string peek(void);
+    std::string file_path(void);
 
     void show_tokens(void);
 };
@@ -56,6 +59,7 @@ void dump_program(std::string filename, std::vector<instr> prog, size_s entry_ad
 
 //Parser
 void program(lexer& lx);
+void include(lexer& lx);
 void decl(lexer& lx);
 void procedure(lexer& lx);
 void block(lexer& lx);

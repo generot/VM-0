@@ -1,6 +1,8 @@
 var smth1, a4;
 var alpha, b5, reii3;
 
+include "ex2.vz"
+
 proc pr {
     !alpha;
 }
@@ -12,6 +14,9 @@ proc main {
     if alpha == 10 && a4 < 2 {
         call pr;
     };
+
+    a := 120;
+    call printA;
 
     !reii3;
 }

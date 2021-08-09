@@ -1,0 +1,9 @@
+var modv1, modv2;
+
+proc add {
+    modv1 := modv1 + modv2;
+}
+
+proc sub {
+    modv1 := modv1 - modv2;
+}

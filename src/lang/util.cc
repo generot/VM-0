@@ -3,7 +3,7 @@
 
 using namespace std;
 
-lexer::lexer(token_vector t_vec) : tokens(t_vec), ix(0) {}
+lexer::lexer(token_vector t_vec, string filedir) : filepath(filedir), tokens(t_vec), ix(0) {}
 
 bool lexer::expect(string tok, bool kill_prog) {
     if(tokens[ix] != tok) {
@@ -21,6 +21,15 @@ bool lexer::eof(void) {
 }
 
 void lexer::unaccept(void) { ix--; }
+
+string lexer::file_path(void) { 
+    int i;
+
+    for(i = (int)filepath.length() - 1; i > 0 && 
+        (filepath[i] != '/' && filepath[i] != '\\'); i--);
+
+    return string(filepath.substr(0, i)) + (i != 0 ? "/" : "");
+}
 
 string lexer::accept(void) { 
     if(!eof()) return tokens[ix++];
@@ -54,7 +63,7 @@ opcode match_comp(string strrep) {
 
 bool is_numeric(string str) {
     for(auto i = str.begin(); i < str.end(); i++) {
-        if(!isdigit(*i))
+        if(!isdigit(*i) && *i != '.')
             return false;
     }
 
@@ -85,6 +94,10 @@ lexer lex_file(char *filename) {
     token_vector tokens;
 
     fstream file(filename, ios::in);
+
+    if(file.fail())
+        ISSUE_ERROR("File \"%s\" does not exist.", filename);
+
     stringstream strm;
 
     strm << file.rdbuf();
@@ -100,7 +113,7 @@ lexer lex_file(char *filename) {
     
     tokens.push_back("eof");
 
-    return lexer(tokens);
+    return lexer(tokens, string(filename));
 }
 //---------------------------------//
 ////////////////LEXER////////////////

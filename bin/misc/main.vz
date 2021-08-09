@@ -1,0 +1,18 @@
+include "mod.vz"
+
+var mainv1, mainv2;
+
+proc main {
+    ?mainv1; ?mainv2;
+
+    mainv1 := mainv1 + 0.2 * mainv2;
+
+    modv1 := mainv1;
+    modv2 := mainv2;
+
+    call add;
+    !modv1;
+
+    call sub;
+    !modv1;
+}

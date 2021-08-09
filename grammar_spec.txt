@@ -40,6 +40,6 @@ proc main {
 <comp> ::= <term> ("<=" | ">=" | "<" | ">" | "==" | "!=" ) <term>
 <term> ::= <factor> ("+" | "-" ) <factor>
 <factor> ::= <value> ("*" | "/") > <value>
-<value> ::= <number> | <ident>
+<value> ::= <number> | <ident> | "(" <expr> ")"
 <ident> ::= [a-zA-Z0-9]+
 <number> ::= [0-9]+

@@ -17,13 +17,30 @@ size_s var_num = 1;
 
 void program(lexer& lx) {
     while(!lx.eof()) {
-        if(!(EXPECT("var") || EXPECT("proc")))
+        if(!(EXPECT("var") || EXPECT("proc") || EXPECT("include")))
             ISSUE_ERROR("Expected top-level declaration, got \"%s\" instead.",
                 lx.accept().c_str());
 
         decl(lx);
+        include(lx);
         procedure(lx);
     }
+}
+
+void include(lexer& lx) {
+    string path = lx.accept();
+
+    if(path != "include") {
+        lx.unaccept();
+        return;
+    }
+    
+    path = lx.accept();
+
+    string filepath = lx.file_path() + path.substr(1, path.length() - 2);
+    lexer _module = lex_file((char*)filepath.c_str());
+
+    program(_module);
 }
 
 void decl(lexer& lx) {
@@ -58,6 +75,10 @@ void procedure(lexer& lx) {
     size_s starting_addr = bytecode.size();
 
     ident = lx.accept();
+
+    if(symbol_table[ident].stype == SYM_FUNCTION)
+        ISSUE_ERROR("Error: Redefinition of function \"%s\".", ident.c_str());
+
     symbol_table[ident] = { SYM_FUNCTION, ident, starting_addr };
 
     block(lx);
